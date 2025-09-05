@@ -11,7 +11,7 @@
 
 This repository contains all the work completed during the **Web Development Course**, organized as follows:  
 
--  **Project-Wine**
+-  **Project**
 
    
 -  **Lab Practice**
