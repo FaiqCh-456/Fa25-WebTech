@@ -1,0 +1,62 @@
+body { 
+    margin: 0; 
+    font-family: sans-serif; 
+}
+.hero {
+     background: #222; 
+     color: #fff; 
+     padding: 2em; 
+     text-align: center; 
+    }
+.navbar ul {
+     list-style: none;
+      display: flex; 
+      justify-content: center; 
+      gap: 1em; 
+      padding: 0; 
+    }
+.navbar a {
+     color: #fff; 
+     text-decoration: none; 
+    }
+.process {
+     display: flex; 
+    justify-content: space-around;
+     padding: 1em; 
+     background: #f4f4f4;
+     }
+.body-types {
+     display: flex;
+      justify-content: center;
+       gap: 0.5em; 
+       padding: 1em;
+     }
+.car-listings {
+     display: flex;
+      justify-content: space-around; 
+      padding: 2em; 
+    }
+.car-card {
+     text-align: center;
+     }
+.benefits { 
+    background: #f9f9f9; 
+    padding: 2em; 
+}
+.about { 
+    padding: 2em; 
+}
+.site-footer { 
+    background: #333; 
+    color: #ccc; 
+    padding: 2em; 
+    text-align: center; 
+}
+.footer-nav a { 
+    margin: 0 0.5em; 
+    color: #ccc; 
+    text-decoration: none; 
+}
+.footer-sections > div { 
+    margin: 0.5em 0;
+ }
