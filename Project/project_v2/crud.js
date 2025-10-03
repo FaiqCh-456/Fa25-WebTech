@@ -1,115 +1,120 @@
+let localPosts = [];
+
 function fetchPosts() {
   $.ajax({
     url: "https://jsonplaceholder.typicode.com/posts",
     method: "GET",
     dataType: "json",
-    success: renderPosts,
+    success: function (data) {
+      // Keep only a few for display
+      localPosts = data.slice(0, 10);
+      renderPosts();
+    },
     error: function (error) {
       console.error("Error fetching posts:", error);
     },
   });
 }
 
-function renderPosts(data) {
-  var postsList = $("#postsList");
+function renderPosts() {
+  const postsList = $("#postsList");
   postsList.empty();
 
-  $.each(data, function (index, post) {
-    postsList.append(
-      `<div class="mb-3">
-            <h3>${post.title}</h3>
-            <div>${post.body}</div>
-            <div>
-                <button class="btn btn-info btn-sm mr-2 btn-edit" data-id="${post.id}">Edit</button>
-                <button class="btn btn-danger btn-sm mr-2 btn-del" data-id="${post.id}">Delete</button>
-            </div>
+  $.each(localPosts, function (_, post) {
+    postsList.append(`
+      <div class="mb-3" data-id="${post.id}">
+        <h3>${post.title}</h3>
+        <div>${post.body}</div>
+        <div>
+          <button class="btn btn-info btn-sm mr-2 btn-edit" data-id="${post.id}">Edit</button>
+          <button class="btn btn-danger btn-sm mr-2 btn-del" data-id="${post.id}">Delete</button>
         </div>
-        <hr />`
-    );
+      </div>
+      <hr />
+    `);
   });
 }
 
 // Delete post
 function deletePost() {
-  let postId = $(this).attr("data-id");
+  const postId = $(this).attr("data-id");
+
   $.ajax({
-    url: "https://jsonplaceholder.typicode.com/posts/" + postId,
+    url: `https://jsonplaceholder.typicode.com/posts/${postId}`,
     method: "DELETE",
-    success: function () {
-      fetchPosts();
-    },
-    error: function (error) {
-      console.error("Error deleting post:", error);
-    },
+    complete: function () {
+      // Update local array
+      localPosts = localPosts.filter(p => p.id != postId);
+      renderPosts();
+    }
   });
 }
 
-// Create / Update post
-function savePost(event) {
-  event.preventDefault();
-  let postId = $("#createBtn").attr("data-id");
-  var title = $("#createTitle").val();
-  var body = $("#createContent").val();
+function savePost(e) {
+  e.preventDefault();
+
+  const postId = $("#createBtn").attr("data-id");
+  const title = $("#createTitle").val();
+  const body = $("#createContent").val();
 
   if (postId) {
     $.ajax({
-      url: "https://jsonplaceholder.typicode.com/posts/" + postId,
+      url: `https://jsonplaceholder.typicode.com/posts/${postId}`,
       method: "PUT",
       data: { title, body },
-      success: function () {
-        fetchPosts();
-      },
-      error: function (error) {
-        console.error("Error updating post:", error);
-      },
+      complete: function () {
+        const idx = localPosts.findIndex(p => p.id == postId);
+        if (idx >= 0) {
+          localPosts[idx].title = title;
+          localPosts[idx].body = body;
+        }
+        renderPosts();
+        resetForm();
+      }
     });
   } else {
+    // Create
     $.ajax({
       url: "https://jsonplaceholder.typicode.com/posts",
       method: "POST",
       data: { title, body },
-      success: function () {
-        fetchPosts();
-      },
-      error: function (error) {
-        console.error("Error creating post:", error);
-      },
+      complete: function () {
+        const newId = localPosts.length ? Math.max(...localPosts.map(p => p.id)) + 1 : 1;
+        localPosts.unshift({ id: newId, title, body });
+        renderPosts();
+        resetForm();
+      }
     });
   }
 }
 
-// Edit post
-function editPost(event) {
-  event.preventDefault();
-  let postId = $(this).attr("data-id");
-  $.ajax({
-    url: "https://jsonplaceholder.typicode.com/posts/" + postId,
-    method: "GET",
-    success: function (data) {
-      $("#clearBtn").show();
-      $("#createTitle").val(data.title);
-      $("#createContent").val(data.body);
-      $("#createBtn").html("Update");
-      $("#createBtn").attr("data-id", data.id);
-    },
-    error: function (error) {
-      console.error("Error fetching post:", error);
-    },
-  });
+function editPost(e) {
+  e.preventDefault();
+  const postId = $(this).attr("data-id");
+  const post = localPosts.find(p => p.id == postId);
+  if (!post) return;
+
+  $("#createTitle").val(post.title);
+  $("#createContent").val(post.body);
+  $("#createBtn").html("Update").attr("data-id", post.id);
+  $("#clearBtn").show();
+}
+
+function resetForm() {
+  $("#createTitle").val("");
+  $("#createContent").val("");
+  $("#createBtn").removeAttr("data-id").html("Create");
+  $("#clearBtn").hide();
 }
 
 $(document).ready(function () {
   fetchPosts();
+
   $(document).on("click", ".btn-del", deletePost);
   $(document).on("click", ".btn-edit", editPost);
   $("#createForm").submit(savePost);
-
   $("#clearBtn").on("click", function (e) {
     e.preventDefault();
-    $("#clearBtn").hide();
-    $("#createBtn").removeAttr("data-id");
-    $("#createBtn").html("Create");
-    $("#createTitle").val("");
-    $("#createContent").val("");
+    resetForm();
   });
 });
