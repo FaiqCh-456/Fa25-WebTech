@@ -6,7 +6,6 @@ function fetchPosts() {
     method: "GET",
     dataType: "json",
     success: function (data) {
-      // Keep only a few for display
       localPosts = data.slice(0, 10);
       renderPosts();
     },
