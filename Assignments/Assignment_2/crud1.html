@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD Operations</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding-top: 70px;
+    }
+    .navbar {
+      background: #fff !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .post-card {
+      transition: transform 0.2s;
+    }
+    .post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    }
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .empty-state {
+      padding: 60px 20px;
+      text-align: center;
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">BeLeasing</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">CRUD</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner-border text-light" style="width: 3rem; height: 3rem;"></div>
+  </div>
+
+  
+  <div class="container mt-4">
+    <div class="row mb-4">
+      <div class="col">
+        <h1 class="fw-bold">Posts Management</h1>
+        <p class="text-muted">Create, read, update, and delete posts using JSONPlaceholder API</p>
+      </div>
+    </div>
+
+    <div class="row">
+      
+      <div class="col-lg-4 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0" id="formTitle">Create New Post</h5>
+          </div>
+          <div class="card-body">
+            <form id="postForm">
+              <div class="mb-3">
+                <label for="postTitle" class="form-label">Title *</label>
+                <input type="text" class="form-control" id="postTitle" placeholder="Enter post title" required>
+              </div>
+              <div class="mb-3">
+                <label for="postContent" class="form-label">Content *</label>
+                <textarea class="form-control" id="postContent" rows="5" placeholder="Enter post content" required></textarea>
+              </div>
+              <div class="d-grid gap-2">
+                <button id="submitBtn" type="submit" class="btn btn-primary">Create Post</button>
+                <button id="cancelBtn" type="button" class="btn btn-secondary" style="display: none;">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5>All Posts <span class="badge bg-primary" id="postCount">0</span></h5>
+          <button class="btn btn-outline-primary btn-sm" id="refreshBtn">
+            <span>🔄 Refresh</span>
+          </button>
+        </div>
+        
+        <div id="postsList"></div>
+        
+        <div id="emptyState" class="empty-state" style="display: none;">
+          <h5>No posts yet</h5>
+          <p>Create your first post using the form</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2023 BeLeasing | All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    
+    let posts = [];
+    let editingPostId = null;
+
+    
+    function showLoading() {
+      $('#loadingOverlay').css('display', 'flex');
+    }
+
+    function hideLoading() {
+      $('#loadingOverlay').css('display', 'none');
+    }
+
+    
+    function fetchPosts() {
+      showLoading();
+      
+      $.ajax({
+        url: "https://jsonplaceholder.typicode.com/posts",
+        method: "GET",
+        success: function(data) {
+          posts = data.slice(0, 10); // Get first 10 posts
+          renderPosts();
+          hideLoading();
+        },
+        error: function() {
+          alert('Failed to load posts. Please try again.');
+          hideLoading();
+        }
+      });
+    }
+
+    
+    function renderPosts() {
+      const $postsList = $("#postsList");
+      const $emptyState = $("#emptyState");
+      const $postCount = $("#postCount");
+      
+      $postsList.empty();
+      $postCount.text(posts.length);
+
+      if (posts.length === 0) {
+        $emptyState.show();
+        return;
+      }
+
+      $emptyState.hide();
+
+      posts.forEach(function(post) {
+        const postCard = `
+          <div class="card post-card shadow-sm mb-3">
+            <div class="card-body">
+              <h6 class="card-title text-capitalize">${escapeHtml(post.title)}</h6>
+              <p class="card-text text-muted">${escapeHtml(post.body)}</p>
+              <button class="btn btn-sm btn-outline-primary btn-edit" data-id="${post.id}">Edit</button>
+              <button class="btn btn-sm btn-outline-danger btn-delete" data-id="${post.id}">Delete</button>
+            </div>
+          </div>
+        `;
+        $postsList.append(postCard);
+      });
+    }
+
+    
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    
+    function savePost(e) {
+      e.preventDefault();
+
+      const title = $('#postTitle').val().trim();
+      const body = $('#postContent').val().trim();
+
+      if (!title || !body) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      showLoading();
+
+      if (editingPostId) {
+        
+        $.ajax({
+          url: `https://jsonplaceholder.typicode.com/posts/${editingPostId}`,
+          method: "PUT",
+          data: JSON.stringify({ id: editingPostId, title, body, userId: 1 }),
+          contentType: "application/json",
+          success: function() {
+            
+            const index = posts.findIndex(p => p.id == editingPostId);
+            if (index >= 0) {
+              posts[index].title = title;
+              posts[index].body = body;
+            }
+            renderPosts();
+            resetForm();
+            hideLoading();
+            alert('Post updated successfully!');
+          },
+          error: function() {
+            hideLoading();
+            alert('Failed to update post. Please try again.');
+          }
+        });
+      } else {
+        
+        $.ajax({
+          url: "https://jsonplaceholder.typicode.com/posts",
+          method: "POST",
+          data: JSON.stringify({ title, body, userId: 1 }),
+          contentType: "application/json",
+          success: function() {
+            
+            const newId = posts.length ? Math.max(...posts.map(p => p.id)) + 1 : 1;
+            posts.unshift({ id: newId, title, body, userId: 1 });
+            renderPosts();
+            resetForm();
+            hideLoading();
+            alert('Post created successfully!');
+          },
+          error: function() {
+            hideLoading();
+            alert('Failed to create post. Please try again.');
+          }
+        });
+      }
+    }
+
+    
+    function editPost() {
+      const postId = $(this).data("id");
+      const post = posts.find(p => p.id == postId);
+      
+      if (!post) return;
+
+      
+      $('#postTitle').val(post.title);
+      $('#postContent').val(post.body);
+      $('#submitBtn').text('Update Post');
+      $('#cancelBtn').show();
+      $('#formTitle').text('Edit Post');
+      editingPostId = post.id;
+
+      
+      $('html, body').animate({
+        scrollTop: $("#postForm").offset().top - 80
+      }, 300);
+    }
+
+    
+    function deletePost() {
+      const postId = $(this).data("id");
+      
+      if (!confirm('Are you sure you want to delete this post?')) {
+        return;
+      }
+
+      showLoading();
+
+      $.ajax({
+        url: `https://jsonplaceholder.typicode.com/posts/${postId}`,
+        method: "DELETE",
+        success: function() {
+          
+          posts = posts.filter(p => p.id != postId);
+          renderPosts();
+          hideLoading();
+          alert('Post deleted successfully!');
+        },
+        error: function() {
+          hideLoading();
+          alert('Failed to delete post. Please try again.');
+        }
+      });
+    }
+
+    
+    function resetForm() {
+      $('#postTitle').val('');
+      $('#postContent').val('');
+      $('#submitBtn').text('Create Post');
+      $('#cancelBtn').hide();
+      $('#formTitle').text('Create New Post');
+      editingPostId = null;
+    }
+
+    
+    $(document).ready(function() {
+      fetchPosts();
+
+      
+      $('#postForm').on('submit', savePost);
+      $('#cancelBtn').on('click', resetForm);
+      $('#refreshBtn').on('click', fetchPosts);
+      $(document).on('click', '.btn-edit', editPost);
+      $(document).on('click', '.btn-delete', deletePost);
+    });
+  </script>
+</body>
+</html>
