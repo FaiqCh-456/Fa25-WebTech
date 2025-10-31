@@ -20,9 +20,6 @@ This repository contains all the work completed during the **Web Development Cou
 -  **Assignments (4)**  
    
 
--  **Lab Tasks (4)**  
-
-
 -  **Exams(2)**  
   
 
