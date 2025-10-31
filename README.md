@@ -1,13 +1,13 @@
-# 🌐 Web Development Course Repository  
+#  Web Development Course Repository  
 
-### 📌 Student Information  
+###  Student Information  
 - **Name:** Faiq Yousaf  
 - **Roll Number:** SP23-BCS-041
 - **Instructor:** Sir Usman 
 
 ---
 
-## 📂 Repository Structure  
+##  Repository Structure  
 
 This repository contains all the work completed during the **Web Development Course**, organized as follows:  
 
