@@ -17,7 +17,7 @@ This repository contains all the work completed during the **Web Development Cou
 -  **Lab Practice**
 
 
--  **Assignments (4)**  
+-  **Assignments (8)**  
    
 
 -  **Exams(2)**  
