@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeLeasing - Contact</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Fixed Header */
+        .navbar {
+            background: #fff !important;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 20px;
+            color: #000 !important;
+        }
+        .nav-link {
+            color: #000 !important;
+            font-weight: 500;
+            margin-left: 20px;
+            text-transform: uppercase;
+        }
+        .nav-link.active {
+            font-weight: 700;
+        }
+
+        /* Hero Section with Image */
+        .hero-section {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/068/344/137/small_2x/a-male-car-dealer-and-a-woman-are-standing-together-smiling-and-giving-thumbs-up-in-front-of-a-car-dealership-video.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin-top: 76px; /* Account for fixed header */
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+        }
+        .hero-content {
+            background: rgba(13, 13, 43, 0.9);
+            color: white;
+            padding: 40px;
+            max-width: 400px;
+            margin-left: 50px;
+        }
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero-content h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+        .contact-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .contact-info .phone {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 20px;
+        }
+        .contact-info .email {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+        }
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #000;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            margin: 0 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .contact-section {
+            padding: 80px 0;
+        }
+        .contact-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+        .contact-card h5 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .contact-card form input,
+        .contact-card form textarea {
+            border: none;
+            border-bottom: 1px solid #ccc;
+            border-radius: 0;
+            padding: 10px 5px;
+        }
+        .contact-card form input:focus,
+        .contact-card form textarea:focus {
+            outline: none;
+            border-color: #000;
+            box-shadow: none;
+        }
+        .contact-card button {
+            background: #0d0d2b;
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+        }
+        .contact-card button:hover {
+            background:green;
+        }
+
+        /* Convenience Section */
+        .convenience-section {
+            background: #f8f9fa !important;
+        }
+
+        /* Footer */
+        .logo {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .logo strong {
+            font-size: 20px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 50vh;
+                min-height: 350px;
+                background-attachment: scroll;
+            }
+            .hero-content {
+                margin-left: 20px;
+                margin-right: 20px;
+                padding: 30px 25px;
+                max-width: none;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+            .contact-info .phone,
+            .contact-info .email {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content {
+                margin: 10px;
+                padding: 25px 20px;
+            }
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .hero-content h2 {
+                font-size: 1.3rem;
+            }
+            .contact-info {
+                padding: 40px 0;
+            }
+            .contact-info .phone,
+            .contact-info .email {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top py-3">
+        <div class="container-fluid">
+            <a class="navbar-brand logo" href="index.html"><strong>be</strong>leasing</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">OFFER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">CONTACT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cv.html">CV</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Contact CTA -->
+    <section class="hero-section">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>ANY QUESTIONS?</h1>
+                <h2>CONTACT US.</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="text-center text-md-start">
+                        <h3>Available Cars</h3>
+                        <div class="phone">+61 (0) 3 8376 6284</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center text-md-start">
+                        <h3>Kinds of Cars</h3>
+                        <div class="email">noreply@envato.com</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="text-center">
+                        <div class="social-icons">
+                            <a href="#">f</a>
+                            <a href="#">t</a>
+                            <a href="#">in</a>
+                            <a href="#">yt</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section bg-light">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="contact-card">
+                        <h5>LEVEL 13, 2 ELIZABETH VICTORIA 3000, AUSTRALIA</h5>
+                        <p class="text-muted">Monday - Friday: 8am - 5pm</p>
+                        <img src="https://themes.muffingroup.com/be/leasing2/wp-content/uploads/2023/02/beleasing2-contact-pic1.webp" class="img-fluid" alt="Contact office">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contact-card">
+                        <h5>HAVE A QUESTION?</h5>
+                        <h5> WRITE TO US!</h5>
+                        <div class="alert alert-success" id="successMessage" style="display: none;">
+                            <strong>Success!</strong> Your message has been sent successfully. We'll get back to you soon.
+                        </div>
+                        <form id="contactForm" novalidate>
+                            <div class="mb-3">
+                                <input type="text" id="fullName" class="form-control" placeholder="Full name *" required>
+                                <div class="invalid-feedback" id="nameError">
+                                    Please provide a valid full name.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" id="phone" class="form-control" placeholder="Phone *" required>
+                                <div class="invalid-feedback" id="phoneError">
+                                    Please provide a valid phone number.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" id="email" class="form-control" placeholder="E-mail address *" required>
+                                <div class="invalid-feedback" id="emailError">
+                                    Please provide a valid email address.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <textarea id="message" class="form-control" rows="4" placeholder="Your message..." required></textarea>
+                                <div class="invalid-feedback" id="messageError">
+                                    Please provide a message (minimum 10 characters).
+                                </div>
+                            </div>
+                            <button type="submit" id="submitBtn" class="btn w-100 text-white">SEND A MESSAGE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid py-5 bg-light convenience-section">
+        <div class="row align-items-center g-5">
+            <div class="col-md-4 convenience-text">
+                <h2 class="display-5 fw-bold text-dark mb-4">RENTING IS PURE<br>CONVENIENCE</h2>
+                <p class="text-secondary small">
+                    Maximus justo. Maecenas mi tortor, pellentesque a aliquam ut, fringilla eleifend lectus. Maecenas.
+                </p>
+                <button class="btn btn-dark px-4 py-2 fw-bold">CHECK YOUR CAR &rarr;</button>
+            </div>
+
+            <!-- Center Image -->
+            <div class="col-md-5 text-center convenience-image">
+                <img src="https://themes.muffingroup.com/be/leasing2/wp-content/uploads/2023/02/beleasing2-about-pic1-484x424.webp" 
+                     class="img-fluid" 
+                     alt="Car">
+            </div>
+
+            <!-- Right Features -->
+            <div class="col-md-3 convenience-features">
+                <ul class="list-unstyled">
+                    <li class="mb-3 d-flex align-items-start">
+                        <span class="fs-4 text-dark me-2">&bull;</span> Service and full care included
+                    </li>
+                    <li class="mb-3 d-flex align-items-start">
+                        <span class="fs-4 text-dark me-2">&bull;</span> Possibility of changing the car to a newer one on a regular basis
+                    </li>
+                    <li class="mb-0 d-flex align-items-start">
+                        <span class="fs-4 text-dark me-2">&bull;</span> Predictable costs of operating the car
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+                <div class="footer-logo mb-3 mb-md-0 d-flex align-items-center">
+                    <div class="logo me-2"><strong>be</strong>leasing</div>
+                    <span class="small text-white-50">Luxury cars for you</span>
+                </div>
+                <div class="social-icons d-flex gap-3">
+                    <a href="#" class="text-white-50"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 2.163c3.204 0 3.584.013 4.856.071 1.171.054 1.839.248 2.378.467.54.218.966.505 1.393.931a3.812 3.812 0 0 1 .931 1.393c.219.539.413 1.207.467 2.378.058 1.272.071 1.652.071 4.856s-.013 3.584-.071 4.856c-.054 1.171-.248 1.839-.467 2.378a3.812 3.812 0 0 1-.931 1.393 3.812 3.812 0 0 1-1.393.931c-.539.219-1.207.413-2.378.467-1.272.058-1.652.071-4.856.071s-3.584-.013-4.856-.071c-1.171-.054-1.839-.248-2.378-.467a3.812 3.812 0 0 1-1.393-.931 3.812 3.812 0 0 1-.931-1.393c-.219-.539-.413-1.207-.467-2.378-.058-1.272-.071-1.652-.071-4.856s.013-3.584.071-4.856c.054-1.171.248-1.839.467-2.378a3.812 3.812 0 0 1 .931-1.393 3.812 3.812 0 0 1 1.393-.931c.539-.219 1.207-.413 2.378-.467C8.416 2.176 8.796 2.163 12 2.163zm0 2.138c-3.111 0-3.484.013-4.708.069-1.077.05-1.527.23-1.846.357a2.012 2.012 0 0 0-.74.453 2.012 2.012 0 0 0-.453.74c-.127.319-.307.769-.357 1.846-.056 1.224-.069 1.597-.069 4.708s.013 3.484.069 4.708c.05 1.077.23 1.527.357 1.846a2.012 2.012 0 0 0 .453.74 2.012 2.012 0 0 0 .74.453c.319.127.769.307 1.846.357 1.224.056 1.597.069 4.708.069s3.484-.013 4.708-.069c1.077-.05 1.527-.23 1.846-.357a2.012 2.012 0 0 0 .74-.453 2.012 2.012 0 0 0 .453-.74c.127-.319.307-.769.357-1.846-.056-1.224-.069-1.597-.069-4.708s-.013-3.484-.069-4.708c-.05-1.077-.23-1.527-.357-1.846a2.012 2.012 0 0 0-.453-.74 2.012 2.012 0 0 0-.74-.453c-.319-.127-.769-.307-1.846-.357-1.224-.056-1.597-.069-4.708-.069zM12 6.865a5.135 5.135 0 1 0 0 10.27 5.135 5.135 0 0 0 0-10.27zm0 2.138a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm6.406-4.962a.949.949 0 1 0 0 1.898.949.949 0 0 0 0-1.898z" fill="currentColor"/></svg></a>
+                    <a href="#" class="text-white-50"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 2.163c3.204 0 3.584.013 4.856.071 1.171.054 1.839.248 2.378.467.54.218.966.505 1.393.931a3.812 3.812 0 0 1 .931 1.393c.219.539.413 1.207.467 2.378.058 1.272.071 1.652.071 4.856s-.013 3.584-.071 4.856c-.054 1.171-.248 1.839-.467 2.378a3.812 3.812 0 0 1-.931 1.393 3.812 3.812 0 0 1-1.393.931c-.539.219-1.207.413-2.378.467-1.272.058-1.652.071-4.856.071s-3.584-.013-4.856-.071c-1.171-.054-1.839-.248-2.378-.467a3.812 3.812 0 0 1-1.393-.931 3.812 3.812 0 0 1-.931-1.393c-.219-.539-.413-1.207-.467-2.378-.058-1.272-.071-1.652-.071-4.856s.013-3.584.071-4.856c.054-1.171.248-1.839.467-2.378a3.812 3.812 0 0 1 .931-1.393 3.812 3.812 0 0 1 1.393-.931c.539-.219 1.207-.413 2.378-.467C8.416 2.176 8.796 2.163 12 2.163zm0 2.138c-3.111 0-3.484.013-4.708.069-1.077.05-1.527.23-1.846.357a2.012 2.012 0 0 0-.74.453 2.012 2.012 0 0 0-.453.74c-.127.319-.307.769-.357 1.846-.056 1.224-.069 1.597-.069 4.708s.013 3.484.069 4.708c.05 1.077.23 1.527.357 1.846a2.012 2.012 0 0 0 .453.74 2.012 2.012 0 0 0 .74.453c.319.127.769.307 1.846.357 1.224.056 1.597.069 4.708.069s3.484-.013 4.708-.069c1.077-.05 1.527-.23 1.846-.357a2.012 2.012 0 0 0 .74-.453 2.012 2.012 0 0 0 .453-.74c.127-.319.307-.769.357-1.846-.056-1.224-.069-1.597-.069-4.708s-.013-3.484-.069-4.708c-.05-1.077-.23-1.527-.357-1.846a2.012 2.012 0 0 0-.453-.74 2.012 2.012 0 0 0-.74-.453c-.319-.127-.769-.307-1.846-.357-1.224-.056-1.597-.069-4.708-.069zM12 6.865a5.135 5.135 0 1 0 0 10.27 5.135 5.135 0 0 0 0-10.27zm0 2.138a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm6.406-4.962a.949.949 0 1 0 0 1.898.949.949 0 0 0 0-1.898z" fill="currentColor"/></svg></a>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-4">
+                <div class="col">
+                    <h4 class="text-uppercase fw-bold mb-3">About</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Contact us</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Accessibility</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Careers</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Request brochure</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4 class="text-uppercase fw-bold mb-3">Leasing & Finance</h4>
+                    <ul class="list-unstyled mb-4">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Apply for credit</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Reward & finance programs</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">End of lease options</a></li>
+                    </ul>
+                    <h4 class="text-uppercase fw-bold mb-3">Help & Support</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Roadside assistance</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Navigation</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4 class="text-uppercase fw-bold mb-3">Owners</h4>
+                    <ul class="list-unstyled mb-4">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Benefits</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Pay my bill</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Drivers website</a></li>
+                    </ul>
+                    <h4 class="text-uppercase fw-bold mb-3">Our Brand</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Motorsports</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Safety technology</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Luxury to buy</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4 class="text-uppercase fw-bold mb-3">Service & Warranty</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Maintenance schedule</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Find a dealer</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">BeLeasing tire center</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Service by BeLeasing</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Warranty coverage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center pt-3 border-top border-secondary border-opacity-25 small text-white-50">
+                <p class="mb-2 mb-md-0">&copy; 2023 Betheme by Muffin group | All Rights Reserved | Powered by WordPress</p>
+                <a href="#" class="text-white-50 text-decoration-none go-to-top">GO TO TOP &uarr;</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            
+            const fullNameInput = document.getElementById('fullName');
+            const phoneInput = document.getElementById('phone');
+            const emailInput = document.getElementById('email');
+            const messageInput = document.getElementById('message');
+            
+            function validateFullName(value) {
+                return value.trim().length >= 2 && /^[a-zA-Z\s]+$/.test(value.trim());
+            }
+            
+            function validatePhone(value) {
+                const phoneRegex = /^[\+]?[\d\s\-\(\)]{10,}$/;
+                return phoneRegex.test(value.replace(/\s/g, ''));
+            }
+            
+            function validateEmail(value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(value);
+            }
+            
+            function validateMessage(value) {
+                return value.trim().length >= 10;
+            }
+            
+            function showError(input) {
+                input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
+            }
+            
+            function showSuccess(input) {
+                input.classList.add('is-valid');
+                input.classList.remove('is-invalid');
+            }
+            
+            function clearValidation(input) {
+                input.classList.remove('is-invalid', 'is-valid');
+            }
+            
+            function validateInput(input, validator) {
+                const value = input.value;
+                if (value.trim() === '') {
+                    showError(input);
+                    return false;
+                } else if (validator(value)) {
+                    showSuccess(input);
+                    return true;
+                } else {
+                    showError(input);
+                    return false;
+                }
+            }
+            
+            fullNameInput.addEventListener('blur', function() {
+                if (this.value.trim()) {
+                    validateInput(this, validateFullName);
+                }
+            });
+            
+            phoneInput.addEventListener('blur', function() {
+                if (this.value.trim()) {
+                    validateInput(this, validatePhone);
+                }
+            });
+            
+            emailInput.addEventListener('blur', function() {
+                if (this.value.trim()) {
+                    validateInput(this, validateEmail);
+                }
+            });
+            
+            messageInput.addEventListener('blur', function() {
+                if (this.value.trim()) {
+                    validateInput(this, validateMessage);
+                }
+            });
+            
+            [fullNameInput, phoneInput, emailInput, messageInput].forEach(input => {
+                input.addEventListener('input', function() {
+                    if (this.classList.contains('is-invalid') && this.value.trim()) {
+                        clearValidation(this);
+                    }
+                });
+            });
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const isNameValid = validateInput(fullNameInput, validateFullName);
+                const isPhoneValid = validateInput(phoneInput, validatePhone);
+                const isEmailValid = validateInput(emailInput, validateEmail);
+                const isMessageValid = validateInput(messageInput, validateMessage);
+                
+                if (isNameValid && isPhoneValid && isEmailValid && isMessageValid) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'SENDING...';
+                    
+                    setTimeout(() => {
+                        successMessage.style.display = 'block';
+                        form.reset();
+                        
+                        [fullNameInput, phoneInput, emailInput, messageInput].forEach(input => {
+                            clearValidation(input);
+                        });
+                        
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'SEND A MESSAGE';
+                        
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                        }, 5000);
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
