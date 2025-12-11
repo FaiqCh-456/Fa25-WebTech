@@ -36,7 +36,7 @@ app.get('/contact', (req, res) => res.render('contact', { user: req.user }));
 app.get('/login', (req, res) => res.render('login', { user: req.user, error: null }));
 app.get('/register', (req, res) => res.render('register', { user: req.user, error: null }));
 app.get('/crud', async (req, res) => {
-    if(!req.user) return res.redirect('/login');
+    if(!req.user || !req.user.isAdmin) return res.redirect('/login');
     const Car = require('./models/car');
     const cars = await Car.find();
     res.render('crud', { user: req.user, cars });
