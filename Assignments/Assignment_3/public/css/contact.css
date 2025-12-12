@@ -1,0 +1,196 @@
+ body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Fixed Header */
+        .navbar {
+            background: #fff !important;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 20px;
+            color: #000 !important;
+        }
+        .nav-link {
+            color: #000 !important;
+            font-weight: 500;
+            margin-left: 20px;
+            text-transform: uppercase;
+        }
+        .nav-link.active {
+            font-weight: 700;
+        }
+
+        /* Hero Section with Image */
+        .hero-section {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/068/344/137/small_2x/a-male-car-dealer-and-a-woman-are-standing-together-smiling-and-giving-thumbs-up-in-front-of-a-car-dealership-video.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin-top: 76px; /* Account for fixed header */
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+        }
+        .hero-content {
+            background: rgba(13, 13, 43, 0.9);
+            color: white;
+            padding: 40px;
+            max-width: 400px;
+            margin-left: 50px;
+        }
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero-content h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+        .contact-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .contact-info .phone {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 20px;
+        }
+        .contact-info .email {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+        }
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #000;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            margin: 0 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .contact-section {
+            padding: 80px 0;
+        }
+        .contact-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+        .contact-card h5 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .contact-card form input,
+        .contact-card form textarea {
+            border: none;
+            border-bottom: 1px solid #ccc;
+            border-radius: 0;
+            padding: 10px 5px;
+        }
+        .contact-card form input:focus,
+        .contact-card form textarea:focus {
+            outline: none;
+            border-color: #000;
+            box-shadow: none;
+        }
+        .contact-card button {
+            background: #0d0d2b;
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+        }
+        .contact-card button:hover {
+            background:green;
+        }
+
+        /* Convenience Section */
+        .convenience-section {
+            background: #f8f9fa !important;
+        }
+
+        /* Footer */
+        .logo {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .logo strong {
+            font-size: 20px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 50vh;
+                min-height: 350px;
+                background-attachment: scroll;
+            }
+            .hero-content {
+                margin-left: 20px;
+                margin-right: 20px;
+                padding: 30px 25px;
+                max-width: none;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+            .contact-info .phone,
+            .contact-info .email {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content {
+                margin: 10px;
+                padding: 25px 20px;
+            }
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .hero-content h2 {
+                font-size: 1.3rem;
+            }
+            .contact-info {
+                padding: 40px 0;
+            }
+            .contact-info .phone,
+            .contact-info .email {
+                font-size: 1.3rem;
+            }
+        }

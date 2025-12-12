@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('layouts/header') %>
+    <style>
+        /* Custom Styles for Details Page */
+        .car-title {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: #0c0c2e;
+        }
+        
+        .price-tag {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0c0c2e;
+        }
+
+        .configure-btn {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #0c0c2e;
+            border-bottom: 2px solid #0c0c2e;
+            padding-bottom: 5px;
+            transition: all 0.3s;
+        }
+        .configure-btn:hover {
+            color: #555;
+            border-color: #555;
+        }
+
+        /* Tech Spec Cards */
+        .spec-card {
+            background: white;
+            padding: 2rem;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        .spec-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .spec-icon {
+            width: 50px;
+            height: 50px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            color: #0c0c2e;
+        }
+
+        /* Key Specs Table */
+        .specs-table .row {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .specs-table .label {
+            color: #888;
+            font-size: 0.95rem;
+        }
+        .specs-table .value {
+            font-weight: 600;
+            color: #0c0c2e;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <section class="container py-5 mt-5">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5">
+                <h1 class="car-title text-uppercase mb-4"><%= car.name %></h1>
+                
+                <p class="text-secondary mb-4" style="line-height: 1.8;">
+                    <%= car.description || "Cras gravida maecenas commodo blandit fames non vehicula in massa habitant ante convallis sociosqu at montes nascetur pharetra dictumst risus sapien potenti." %>
+                </p>
+
+                <ul class="list-unstyled text-secondary mb-5">
+                    <li class="mb-2">&bull; Maximus justo.</li>
+                    <li class="mb-2">&bull; Maecenas mi tortor, pellentesque a aliquam ut.</li>
+                    <li class="mb-2">&bull; Fringilla eleifend lectus.</li>
+                    <li class="mb-2">&bull; Maecenas ultrices tellus sit amet sem placerat tempor.</li>
+                </ul>
+
+                <div class="mb-5">
+                    <div class="price-tag mb-4">$<%= car.price %> <span class="fs-6 text-muted fw-normal">/ month</span></div>
+                    <a href="/contact" class="configure-btn">CONFIGURE &rarr;</a>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <img src="<%= car.image %>" class="img-fluid w-100" alt="<%= car.name %>" style="object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light py-5">
+        <div class="container py-4">
+            <h3 class="text-uppercase fw-bold mb-5" style="color: #0c0c2e;">TECHNICAL SPECIFICATIONS</h3>
+            
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                <div class="col">
+                    <div class="spec-card">
+                        <div class="spec-icon">🚗</div>
+                        <h5 class="fw-bold mb-1">Class</h5>
+                        <p class="text-muted small mb-0"><%= car.category %></p>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="spec-card">
+                        <div class="spec-icon">🚪</div>
+                        <h5 class="fw-bold mb-1">Doors/Seats</h5>
+                        <p class="text-muted small mb-0"><%= car.seats %> Seats</p>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="spec-card">
+                        <div class="spec-icon">⛽</div>
+                        <h5 class="fw-bold mb-1">Fuel</h5>
+                        <p class="text-muted small mb-0"><%= car.fuelType %></p>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="spec-card">
+                        <div class="spec-icon">⚙️</div>
+                        <h5 class="fw-bold mb-1">Gearbox</h5>
+                        <p class="text-muted small mb-0"><%= car.transmission %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container py-5 my-5">
+        <div class="row g-5">
+            <div class="col-md-6">
+                <h3 class="text-uppercase fw-bold mb-4" style="color: #0c0c2e;">KEY SPECIFICATIONS OF <%= car.name %></h3>
+                <p class="text-secondary" style="line-height: 1.8;">
+                    Primis ut duis pulvinar lobortis libero aliquet suscipit vivamus mi commodo congue adipiscing integer diam odio placerat donec cubilia etiam imperdiet hendrerit suspendisse facilisis pulvinar sollicitudin dui hac ultrices feugiat class tristique vitae condimentum auctor sagittis ligula varius lobortis magna velit integer hac purus venenatis commodo nisi bibendum suscipit vel curabitur fusce phasellus.
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <div class="specs-table mt-2">
+                    <div class="row align-items-center">
+                        <div class="col-6 label">Year Model</div>
+                        <div class="col-6 value"><%= car.year %></div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-6 label">Fuel Type</div>
+                        <div class="col-6 value"><%= car.fuelType %></div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-6 label">Seats</div>
+                        <div class="col-6 value"><%= car.seats %></div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-6 label">Transmission</div>
+                        <div class="col-6 value"><%= car.transmission %></div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-6 label">Category</div>
+                        <div class="col-6 value"><%= car.category %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('layouts/footer') %>
+</body>
+</html>

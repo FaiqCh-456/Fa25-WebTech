@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('layouts/header') %>
+    <link rel="stylesheet" href="/css/offer.css">
+    <style>
+        .filter-btn.active {
+            background-color: var(--beleasing-dark);
+            color: white;
+            border-color: var(--beleasing-dark);
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+            color: white;
+            padding: 140px 0 80px;
+            margin-top: 76px;
+        }
+        .car-lineup { margin-top: -60px; }
+        
+        /* Pagination Styles */
+        .page-link { color: var(--beleasing-dark); }
+        .page-item.active .page-link {
+            background-color: var(--beleasing-dark);
+            border-color: var(--beleasing-dark);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <section class="hero-section">
+        <div class="container text-center text-md-start">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="display-4 fw-bold mb-3">ALL CARS</h1>
+                    <p class="lead text-white-50">Sociosqu aliquam velit ullamcorper dui cras ex elementum consectetur fusce taciti eros</p>
+                </div>
+                <div class="col-md-6 car-lineup text-center">
+                    <img src="https://themes.muffingroup.com/be/leasing2/wp-content/uploads/2023/02/beleasing2-category3-768x430.webp" class="img-fluid" alt="Car Lineup" style="max-width: 80%;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="filter-section py-5 bg-white shadow-sm">
+        <div class="container">
+            <div class="text-center">
+                <a href="/offer" class="filter-btn btn text-decoration-none <%= !currentCategory ? 'active' : '' %>">ALL CARS</a>
+                <a href="/offer?category=Sedan" class="filter-btn btn text-decoration-none <%= currentCategory === 'Sedan' ? 'active' : '' %>">SEDAN</a>
+                <a href="/offer?category=Hatchback" class="filter-btn btn text-decoration-none <%= currentCategory === 'Hatchback' ? 'active' : '' %>">HATCHBACK</a>
+                <a href="/offer?category=Combi" class="filter-btn btn text-decoration-none <%= currentCategory === 'Combi' ? 'active' : '' %>">COMBI</a>
+                <a href="/offer?category=SUV" class="filter-btn btn text-decoration-none <%= currentCategory === 'SUV' ? 'active' : '' %>">SUV</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section py-5">
+        <div class="container">
+            <div class="row g-4" id="productGrid">
+                
+                <% if(cars.length > 0) { %>
+                    <% cars.forEach(function(car) { %>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product-card h-100">
+                                <img src="<%= car.image %>" class="product-image card-img-top" alt="<%= car.name %>">
+                                <div class="product-body">
+                                    <h3 class="product-title text-uppercase"><%= car.name %></h3>
+                                    <p class="text-secondary small mb-2"><%= car.category %></p>
+                                    <div class="product-price">$<%= car.price %></div>
+                                    <hr>
+                                    <a href="/offer/<%= car._id %>" class="check-details-btn">Check details &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <div class="col-12 text-center py-5">
+                        <h3>No cars found.</h3>
+                        <p>Try clearing your filters or check back later!</p>
+                    </div>
+                <% } %>
+
+            </div>
+
+            <% if (totalPages > 1) { %>
+                <nav aria-label="Page navigation" class="mt-5">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+                            <a class="page-link" href="/offer?page=<%= currentPage - 1 %><%= currentCategory ? '&category=' + currentCategory : '' %>">Previous</a>
+                        </li>
+
+                        <% for(let i = 1; i <= totalPages; i++) { %>
+                            <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                                <a class="page-link" href="/offer?page=<%= i %><%= currentCategory ? '&category=' + currentCategory : '' %>"><%= i %></a>
+                            </li>
+                        <% } %>
+
+                        <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                            <a class="page-link" href="/offer?page=<%= currentPage + 1 %><%= currentCategory ? '&category=' + currentCategory : '' %>">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            <% } %>
+
+        </div>
+    </section>
+
+    <section class="renting-section bg-light py-5 my-5">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-md-6 text-center text-md-start">
+                    <h2 class="display-5 fw-bold text-dark mb-4">RENTING IS PURE<br>CONVENIENCE</h2>
+                    <p class="text-secondary mb-4">Maximus justo. Maecenas mi tortor, pellentesque a aliquam ut, fringilla eleifend lectus. Maecenas.</p>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2 ps-4 position-relative"><span class="position-absolute start-0 fw-bold text-dark">&bull;</span> Service and full care included</li>
+                        <li class="mb-2 ps-4 position-relative"><span class="position-absolute start-0 fw-bold text-dark">&bull;</span> Possibility of changing the car to a newer one</li>
+                        <li class="mb-2 ps-4 position-relative"><span class="position-absolute start-0 fw-bold text-dark">&bull;</span> Predictable costs</li>
+                    </ul>
+                    <button class="btn btn-dark px-4 py-2 fw-bold rounded-pill">CHECK YOUR CAR &rarr;</button>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="https://themes.muffingroup.com/be/leasing2/wp-content/uploads/2023/02/beleasing2-about-pic1-484x424.webp" class="img-fluid" alt="Audi">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('layouts/footer') %>
+</body>
+</html>
