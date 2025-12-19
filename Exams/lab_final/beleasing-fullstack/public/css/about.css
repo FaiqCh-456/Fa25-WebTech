@@ -1,0 +1,121 @@
+/* --- 1. HERO SECTION --- */
+.hero-about {
+    position: relative;
+    height: 60vh;
+    min-height: 500px;
+    /* Dark overlay + Image */
+    background: linear-gradient(rgba(17, 17, 37, 0.7), rgba(17, 17, 37, 0.7)), 
+                url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1600') center/cover;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-top: -1px; /* Removes tiny white gap if any */
+}
+
+.hero-about h1 {
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.step-text {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* --- 2. INTRO SECTION --- */
+.highlight-bg {
+    background-color: #fdf2e9; /* The beige highlight color from screenshot */
+    display: inline;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0 5px;
+}
+
+/* --- 3. CHECKERBOARD FEATURE GRID --- */
+/* This handles the Image Left/Text Right layout */
+.feature-box {
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    background-color: #fff;
+}
+
+.feature-img {
+    height: 100%;
+    min-height: 500px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* --- 4. WHY US ICONS --- */
+.icon-box {
+    width: 70px;
+    height: 70px;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: #0c0c2e; /* Dark Navy */
+    transition: all 0.3s ease;
+}
+
+.icon-box:hover {
+    background-color: #0c0c2e;
+    color: #fff;
+    border-color: #0c0c2e;
+}
+
+/* --- 5. CHECKLIST & QUOTE SECTION --- */
+.quote-box {
+    background-color: #f9f9f9;
+    padding: 100px 0;
+}
+
+.checklist-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #0c0c2e;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    flex-shrink: 0;
+    margin-right: 15px;
+}
+
+/* --- 6. RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 991px) {
+    .feature-box {
+        padding: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-about {
+        min-height: 400px;
+        text-align: center;
+    }
+    
+    .feature-box {
+        padding: 2rem;
+        min-height: auto;
+    }
+    
+    .feature-img {
+        min-height: 300px;
+    }
+    
+    /* Ensure icon boxes center properly on mobile */
+    .icon-box {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

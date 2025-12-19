@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('layouts/header') %>
+    <style>
+        .cart-header { background-color: #f8f9fa; border-bottom: 2px solid #e9ecef; }
+        .product-img { width: 80px; height: 60px; object-fit: cover; border-radius: 6px; }
+        .cart-summary { background-color: #f9f9f9; padding: 25px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <div class="container py-5" style="margin-top: 80px;">
+        <h2 class="mb-4 fw-bold">Shopping Cart</h2>
+
+        <% if (!cart || cart.length === 0) { %>
+            <div class="text-center py-5 bg-light rounded-3">
+                <h3 class="text-muted mb-3">Your cart is empty</h3>
+                <p class="text-secondary mb-4">Looks like you haven't made your choice yet.</p>
+                <a href="/offer" class="btn btn-dark btn-lg px-5">Start Shopping</a>
+            </div>
+        <% } else { %>
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead class="cart-header text-uppercase small text-muted">
+                                <tr>
+                                    <th scope="col" class="py-3">Product</th>
+                                    <th scope="col" class="py-3">Price</th>
+                                    <th scope="col" class="py-3">Quantity</th>
+                                    <th scope="col" class="text-end py-3">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% cart.forEach(item => { %>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="<%= item.image %>" alt="<%= item.name %>" class="product-img shadow-sm me-3">
+                                                <div>
+                                                    <h6 class="mb-0 fw-bold"><%= item.name %></h6>
+                                                    <small class="text-muted">Luxury Class</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>$<%= item.price %></td>
+                                        <td>
+                                            <span class="badge bg-light text-dark border px-3 py-2"><%= item.quantity %></span>
+                                        </td>
+                                        <td class="text-end fw-bold">$<%= item.price * item.quantity %></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4">
+                        <a href="/offer" class="text-decoration-none text-muted">&larr; Continue Shopping</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="cart-summary shadow-sm border">
+                        <h4 class="mb-4">Order Summary</h4>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Subtotal</span>
+                            <strong>$<%= total %></strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4">
+                            <span class="text-muted">Tax (0%)</span>
+                            <strong>$0</strong>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-4 fs-5">
+                            <strong>Total</strong>
+                            <strong>$<%= total %></strong>
+                        </div>
+                        
+                        <a href="/checkout" class="btn btn-dark w-100 btn-lg py-3 rounded-0 text-uppercase fw-bold" style="letter-spacing: 1px;">
+                            Proceed to Checkout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <%- include('layouts/footer') %>
+</body>
+</html>

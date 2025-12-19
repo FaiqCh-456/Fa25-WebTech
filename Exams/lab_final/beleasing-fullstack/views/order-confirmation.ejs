@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <%- include('layouts/header') %> </head>
+<body>
+    <%- include('partials/navbar') %>
+    <div class="container text-center py-5" style="margin-top: 100px;">
+        <h1 class="text-success mb-4">Order Placed Successfully!</h1>
+        <p class="lead">Thank you, <%= order.customerName %>.</p>
+        <div class="alert alert-light border d-inline-block p-4">
+            <strong>Order ID:</strong> <%= order._id %><br>
+            <strong>Total Amount:</strong> $<%= order.totalAmount %>
+        </div>
+        <div class="mt-4">
+            <a href="/offer" class="btn btn-dark">Continue Shopping</a>
+        </div>
+    </div>
+    <%- include('layouts/footer') %>
+</body>
+</html>

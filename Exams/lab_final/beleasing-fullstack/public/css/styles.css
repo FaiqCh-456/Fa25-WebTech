@@ -1,0 +1,304 @@
+/* --- 1. GLOBAL VARIABLES & RESET --- */
+:root {
+  --beleasing-dark: #0c0c2e;
+  --beleasing-gold: #e6b37e;
+  --navbar-bg: #111125;
+  --footer-text: #8da2b5;
+}
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  color: #222;
+  /* Prevent horizontal scrollbar on mobile */
+  overflow-x: hidden; 
+  padding-top: 80px; 
+}
+
+/* --- 2. RESPONSIVE NAVBAR --- */
+.navbar {
+    background: #fff !important;
+    height: 80px;
+    z-index: 1030;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 0 !important;
+}
+
+.logo-container {
+    background-color: var(--navbar-bg);
+    height: 80px;
+    min-width: 180px;
+    margin-right: 0 !important;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 25px;
+}
+
+.logo-container:hover {
+    background-color: #000;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+    font-weight: 300;
+    color: #fff;
+}
+
+.logo-text strong { font-weight: 800; }
+
+.logo-icon {
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+    color: var(--beleasing-gold);
+}
+
+.brand-tagline {
+    color: #6c757d;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-left: 1px solid #eee;
+    padding-left: 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.custom-link {
+    color: #111 !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 0 15px !important;
+}
+
+.custom-link:hover { color: #555 !important; }
+
+/* Dropdown Arrow */
+.dropdown-toggle::after {
+    vertical-align: middle;
+    margin-left: 0.4em;
+    opacity: 0.5;
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+    box-shadow: none !important;
+    margin-right: 15px; /* Spacing from right edge on mobile */
+}
+
+/* --- 3. RESPONSIVE HERO SECTION --- */
+.hero {
+  background: url("https://hips.hearstapps.com/hmg-prod/images/2023-audi-r8-gt-front-three-quarters-motion-3-1664827965.jpg") no-repeat center center/cover;
+  /* Use min-height instead of fixed height so text doesn't get cut off on mobile */
+  min-height: 85vh; 
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Slightly darker overlay for readability */
+}
+
+.hero .container { position: relative; z-index: 2; }
+
+.hero h1 {
+  font-size: 3.5rem; /* Big on desktop */
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.2;
+}
+
+/* Buttons */
+.hero button, .check-car-btn, .learn-more-btn, .btn-dark {
+  background-color: var(--beleasing-dark);
+  border: none;
+  transition: all 0.3s;
+}
+
+.hero button:hover, .check-car-btn:hover, .learn-more-btn:hover, .btn-dark:hover {
+  background-color: #000;
+  transform: translateY(-2px);
+}
+
+.steps div {
+  color: #eee;
+  font-weight: bold;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+/* --- 4. SECTIONS --- */
+.cars-section { background-color: #f8f8f8; }
+
+.car-img {
+  width: 150px;
+  transition: transform 0.3s;
+}
+.car-item:hover .car-img { transform: scale(1.1); }
+
+.brands-container img {
+  height: 35px;
+  max-width: 120px;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  margin: 10px; /* Add spacing for mobile wrapping */
+}
+
+.brands-container img:hover { filter: grayscale(0%); opacity: 1; }
+
+.featured-item {
+  position: relative;
+  height: 50vh;
+  min-height: 300px; /* Ensure visibility on mobile */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+}
+
+.featured-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 60%);
+}
+
+.featured-overlay { position: relative; z-index: 2; }
+
+.crossover-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1600') no-repeat center center/cover;
+  min-height: 60vh; /* Allow growth */
+  display: flex;
+  align-items: center;
+}
+
+.stats-bar .stat-item { border-right: 1px solid #e0e0e0; }
+.stats-bar .stat-item:last-child { border-right: none; }
+
+.icon-circle { width: 60px; height: 60px; }
+
+/* --- 5. FOOTER --- */
+.footer-section {
+    background-color: var(--navbar-bg);
+    font-family: 'Poppins', sans-serif;
+    margin-top: auto; 
+}
+
+.footer-link {
+    color: var(--footer-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+    text-decoration: none;
+    padding-left: 5px; 
+}
+
+.social-icons a {
+    color: #ffffff;
+    transition: opacity 0.3s;
+    opacity: 0.5;
+}
+.social-icons a:hover { opacity: 1; }
+
+#scrollTopBtn {
+    transition: opacity 0.3s;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+#scrollTopBtn:hover { opacity: 0.8; }
+
+/* --- 6. MOBILE & TABLET MEDIA QUERIES --- */
+
+/* Tablet & Smaller (991px and down) */
+@media (max-width: 991px) {
+    /* Navbar Adjustment */
+    .navbar {
+        height: auto; /* Allow navbar to grow when menu opens */
+        min-height: 70px;
+    }
+    .logo-container {
+        height: 70px; /* Slightly smaller logo block */
+        min-width: auto;
+        padding: 0 15px;
+    }
+    .brand-tagline {
+        display: none; /* Hide tagline to save space */
+    }
+    .navbar-collapse {
+        background: white;
+        border-top: 1px solid #eee;
+        margin-top: 0;
+        padding-bottom: 20px;
+        /* Scroll menu if it gets too long on landscape phones */
+        max-height: 80vh; 
+        overflow-y: auto;
+    }
+    .nav-link {
+        padding-left: 20px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+    
+    /* Hero Text Adjustment */
+    .hero h1 {
+        font-size: 2.5rem; 
+    }
+}
+
+/* Mobile Phones (768px and down) */
+@media (max-width: 768px) {
+  body {
+      padding-top: 70px; /* Match smaller mobile navbar */
+  }
+
+  /* Make Hero text smaller so it fits */
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .steps div {
+      font-size: 11px; /* Smaller step text */
+      margin-bottom: 10px;
+  }
+
+  /* Stack Stats Bar vertically without borders */
+  .stats-bar .stat-item {
+      border-right: none;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+  }
+  .stats-bar .stat-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+  }
+
+  /* Footer Center Alignment */
+  .footer-section {
+      text-align: center;
+  }
+  .footer-section .d-flex {
+      justify-content: center !important;
+  }
+  /* Fix social icons alignment on mobile */
+  .footer-section .d-flex.justify-content-between {
+      flex-direction: column;
+      gap: 20px;
+  }
+}

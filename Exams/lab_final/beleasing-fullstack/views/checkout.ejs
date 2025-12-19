@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('layouts/header') %>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <div class="container py-5" style="margin-top: 80px;">
+        <h2 class="mb-4 fw-bold">Secure Checkout</h2>
+        
+        <% if (!cart || cart.length === 0) { %>
+            <div class="text-center py-5 bg-light rounded-3">
+                <h3 class="text-muted mb-3">Your cart is empty.</h3>
+                <p class="text-secondary mb-4">Looks like you haven't added any cars yet.</p>
+                <a href="/offer" class="btn btn-dark btn-lg px-5">Browse Cars</a>
+            </div>
+        <% } else { %>
+            <div class="row g-5">
+                
+                <div class="col-lg-5 order-lg-last">
+                    <div class="card border-0 shadow-sm bg-light">
+                        <div class="card-header bg-transparent border-bottom py-3">
+                            <h5 class="mb-0 fw-bold">Order Summary</h5>
+                        </div>
+                        <div class="card-body p-4">
+                            <ul class="list-group list-group-flush mb-3 rounded-3">
+                                <% cart.forEach(item => { %>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent px-0">
+                                        <div class="d-flex align-items-center">
+                                            <% if(item.image) { %>
+                                                <img src="<%= item.image %>" alt="<%= item.name %>" class="rounded shadow-sm me-3" style="width: 60px; height: 40px; object-fit: cover;">
+                                            <% } %>
+                                            <div>
+                                                <h6 class="my-0 small fw-bold"><%= item.name %></h6>
+                                                <small class="text-muted">Qty: <%= item.quantity || 1 %></small>
+                                            </div>
+                                        </div>
+                                        <span class="text-muted small fw-bold">$<%= item.price %></span>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                            
+                            <hr class="my-3">
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-uppercase small text-muted fw-bold">Total Amount</span>
+                                <span class="fs-4 fw-bold text-dark">$<%= total %></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <h4 class="mb-4">Billing Information</h4>
+                    <form action="/checkout" method="POST" class="needs-validation">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="name" class="form-label small text-uppercase fw-bold text-muted">Full Name</label>
+                                <input type="text" class="form-control form-control-lg bg-light border-0" id="name" name="name" placeholder="John Doe" required>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="email" class="form-label small text-uppercase fw-bold text-muted">Email Address</label>
+                                <input type="email" class="form-control form-control-lg bg-light border-0" id="email" name="email" placeholder="you@example.com" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="number" class="form-label small text-uppercase fw-bold text-muted">Contact Number</label>
+                                <input type="tel" class="form-control form-control-lg bg-light border-0" id="number" name="number" placeholder="+1 234 567 890" required>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="address" class="form-label small text-uppercase fw-bold text-muted">Shipping Address</label>
+                                <input type="text" class="form-control form-control-lg bg-light border-0" id="address" name="address" placeholder="1234 Main St, Apartment, Studio, or Floor" required>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <button class="btn btn-dark w-100 btn-lg py-3 fw-bold text-uppercase" type="submit" style="letter-spacing: 1px;">
+                            Confirm & Place Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <%- include('layouts/footer') %>
+</body>
+</html>
